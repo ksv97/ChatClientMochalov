@@ -1,0 +1,20 @@
+<div class='container'>
+    <body class="text-center">
+      <div class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputLogin" class="sr-only">Username</label>
+        <input id="inputLogin" class="form-control" placeholder="Username" required="" autofocus="" [(ngModel)]="user.username">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" [(ngModel)]="user.password">
+        <div class="checkbox mb-3">
+          <!-- <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label> -->
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Sign in</button>
+        <button class="btn btn-lg btn-outline-secondary btn-block" type="submit" (click)="signup()">Sign up</button>
+      </div>
+    
+    
+    </body>
+  </div>

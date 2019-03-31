@@ -1,0 +1,14 @@
+
+
+.chat-view {
+    background-color: thistle;
+}
+
+.chat-users {
+    background-color: aliceblue;
+}
+
+.chat-message {
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
