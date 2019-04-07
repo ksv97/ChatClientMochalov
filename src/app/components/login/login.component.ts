@@ -24,12 +24,24 @@ export class LoginComponent{
         if (user != null) {
           this.router.navigate(['/chat']);  
         }
+        else {
+          this.messageService.log(`Login failed for user ${user.username}`, true);
+        }
       });   
     
   }
 
   signup() {
-    this.messageService.log('Not implemented', true);
+    this.httpService.signup(this.user).subscribe (user => {
+      if (user != null) {
+        this.messageService.log("Registration succeeded!", false); 
+        this.user = new User();
+      }
+      else {
+        this.messageService.log(`Registration failed for user ${user.username}`, true);
+      }
+    });   
+    
   }
 
 }
