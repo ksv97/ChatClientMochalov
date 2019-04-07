@@ -3,6 +3,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { HttpService } from 'src/app/services/http.service';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { Message } from 'src/app/models/message';
 
 @Component({
   selector: 'app-chat',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class ChatComponent implements OnInit {
 
   message: string = '';
-  messages: string [] = [];
+  messages: Message[] = [];
   loggedInUsers: User[] = []
 
   constructor(public sharedService: SharedService, private http: HttpService, private router: Router) { }
@@ -26,7 +27,11 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage() {
-    this.http.say(this.message).subscribe(
+    let newMessage = new Message();
+    newMessage.username = this.sharedService.currentOnlineUser.username;
+    newMessage.message = this.message;
+
+    this.http.say(newMessage).subscribe(
       createdMessage => {
         this.messages.push(createdMessage)
         this.message = '';

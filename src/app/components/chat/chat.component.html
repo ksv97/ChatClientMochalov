@@ -16,7 +16,7 @@
       
       <div class="chat-view h-100">
           <p class="chat-message" *ngFor="let message of messages">
-              {{message}}
+              <b>{{message.username}}</b> {{message.message}}
           </p>
       </div>
     </div>

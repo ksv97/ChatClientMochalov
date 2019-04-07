@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../models/user';
 import { MessageService } from './message.service';
 import { SharedService } from './shared.service';
+import { Message } from '../models/message';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -64,13 +65,13 @@ export class HttpService {
 
   }
 
-  getChatHistory () : Observable<string[]> {
+  getChatHistory () : Observable<Message[]> {
     let url = this.baseUrl + '/chat';
 
-    return this.http.get<string[]>(url).pipe(
+    return this.http.get<Message[]>(url).pipe(
       tap(_ => console.log('chat history loaded successfully')
       ),
-      catchError(this.handleError<string[]>('getChatHistory', null))
+      catchError(this.handleError<Message[]>('getChatHistory', null))
     );
   }
 
@@ -84,14 +85,14 @@ export class HttpService {
     );
   }
 
-  say (message: string):  Observable<string> {
+  say (message: Message):  Observable<Message> {
     let url = this.baseUrl + '/say';
 
-    return this.http.post<string>(url, {message: message}, httpOptions).pipe(
-      tap((newMessage: string) => {
+    return this.http.post<Message>(url, message, httpOptions).pipe(
+      tap((newMessage: Message) => {
         console.log('new message added successfully')
       }),
-      catchError(this.handleError<string>('say', null))
+      catchError(this.handleError<Message>('say', null))
     );
   }
 
