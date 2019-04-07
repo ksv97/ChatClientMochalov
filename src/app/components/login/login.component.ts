@@ -35,7 +35,6 @@ export class LoginComponent{
     this.httpService.signup(this.user).subscribe (user => {
       if (user != null) {
         this.messageService.log("Registration succeeded!", false); 
-        this.user = new User();
       }
       else {
         this.messageService.log(`Registration failed for user ${user.username}`, true);

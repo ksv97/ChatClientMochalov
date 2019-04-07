@@ -49,6 +49,21 @@ export class HttpService {
 
   }
 
+  signout (currentUser: User): Observable<User> {
+
+    let url = this.baseUrl + '/signout';
+
+    return this.http.post<User>(url, currentUser, httpOptions).pipe(
+      tap((signedOutUser: User) => {
+        //this.messageService.log(`user ${user.username} successfully logged in`, false);
+        console.log(signedOutUser);
+        console.log('Sign out succeeded!');
+      }),
+      catchError(this.handleError<User>('signout', null))
+    );
+
+  }
+
   getChatHistory () : Observable<string[]> {
     let url = this.baseUrl + '/chat';
 

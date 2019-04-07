@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { HttpService } from 'src/app/services/http.service';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -14,7 +15,15 @@ export class ChatComponent implements OnInit {
   messages: string [] = [];
   loggedInUsers: User[] = []
 
-  constructor(public sharedService: SharedService, private http: HttpService) { }
+  constructor(public sharedService: SharedService, private http: HttpService, private router: Router) { }
+
+  signOut() {
+    this.http.signout(this.sharedService.currentOnlineUser)
+    .subscribe(user => {
+      this.sharedService.currentOnlineUser = new User ();
+      this.router.navigate(['/login']);
+    });    
+  }
 
   sendMessage() {
     this.http.say(this.message).subscribe(
@@ -34,6 +43,8 @@ export class ChatComponent implements OnInit {
     this.message = '';
     */
   }
+
+  
 
   ngOnInit() {
     this.http.getChatHistory().subscribe(
