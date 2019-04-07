@@ -16,7 +16,7 @@
       
       <div class="chat-view h-100">
           <p class="chat-message" *ngFor="let message of messages">
-              <i>{{message.date}}</i> <b>[{{message.username}}]</b>: {{message.message}}
+              <i>{{message.date}}</i> <b>[{{message.username}}]</b>: {{message.message | linkify}}
           </p>
       </div>
     </div>
