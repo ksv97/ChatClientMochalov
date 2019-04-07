@@ -29,7 +29,7 @@ export class HttpService {
     return this.http.post<User>(url, user, httpOptions).pipe(
       tap((loggedInUser: User) => {
         //this.messageService.log(`user ${user.username} successfully logged in`, false);
-        this.sharedService.currentOnlineUser = user;
+        this.sharedService.currentOnlineUser = loggedInUser;
       }),
       catchError(this.handleError<User>('login', null))
     );

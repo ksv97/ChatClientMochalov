@@ -4,6 +4,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { Message } from 'src/app/models/message';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-chat',
@@ -16,13 +17,16 @@ export class ChatComponent implements OnInit {
   messages: Message[] = [];
   loggedInUsers: User[] = []
 
-  constructor(public sharedService: SharedService, private http: HttpService, private router: Router) { }
+  constructor(public sharedService: SharedService, private http: HttpService, private router: Router, private messageService: MessageService) { }
 
   signOut() {
     this.http.signout(this.sharedService.currentOnlineUser)
     .subscribe(user => {
-      this.sharedService.currentOnlineUser = new User ();
-      this.router.navigate(['/login']);
+      if (user != null) {
+        this.sharedService.currentOnlineUser = new User ();
+        this.router.navigate(['/login']);
+      }
+      else this.messageService.log('Unable to logout. User doesnt exist!', true);
     });    
   }
 

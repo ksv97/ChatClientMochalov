@@ -21,7 +21,10 @@ export class LoginComponent{
     // let loginResult = this.http.login(this.userLogin);
     
       this.httpService.login(this.user).subscribe (user => {
-          this.router.navigate(['/chat']);  
+        if (user != null) {
+          this.router.navigate(['/chat']);
+        }
+        else this.messageService.log('Authentication error: invalid login or password!', true);
       });   
     
   }
