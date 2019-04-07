@@ -21,12 +21,7 @@ export class LoginComponent{
     // let loginResult = this.http.login(this.userLogin);
     
       this.httpService.login(this.user).subscribe (user => {
-        if (user != null) {
           this.router.navigate(['/chat']);  
-        }
-        else {
-          this.messageService.log(`Login failed for user ${user.username}`, true);
-        }
       });   
     
   }
