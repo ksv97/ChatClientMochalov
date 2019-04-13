@@ -2,10 +2,12 @@
 
 .chat-view {
     background-color: thistle;
+    border-radius: 10px;
 }
 
 .chat-users {
     background-color: aliceblue;
+    border-radius: 10px;
 }
 
 .chat-message {
