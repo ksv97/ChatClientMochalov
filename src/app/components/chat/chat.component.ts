@@ -30,6 +30,21 @@ export class ChatComponent implements OnInit {
     });    
   }
 
+  clearChatHistory() {
+    this.http.cleanChatHistory().subscribe(
+      numberOfDeletedMessages => {
+        if (numberOfDeletedMessages >= 0) {
+          this.messages = [];
+          this.messageService.log('Successfully deleted chat history!', false);
+        }
+        else {
+          this.messageService.log('An error occured when trying to delete chat history', true);
+        }
+        
+      }
+    )
+  }
+
   sendMessage() {
     let newMessage = new Message();
     newMessage.username = this.sharedService.currentOnlineUser.username;

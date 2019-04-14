@@ -36,6 +36,17 @@ export class HttpService {
 
   }
 
+  cleanChatHistory() : Observable<number> {
+    let url = this.baseUrl + '/clean';
+
+    return this.http.delete<number>(url, httpOptions).pipe(
+      tap( (numberOfdeletedEntries: number) => {
+        console.log('messages deleted: ' + numberOfdeletedEntries);
+      }),
+      catchError(this.handleError<number>('cleanChatHistory', -1))
+    )
+  }
+
   signup (newUser: User): Observable<User> {
 
     let url = this.baseUrl + '/register';

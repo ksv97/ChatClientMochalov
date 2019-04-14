@@ -37,5 +37,10 @@
           </div>
         </div>
   </div>
+  <div *ngIf="sharedService.currentOnlineUser.username = 'admin'" class="row mt-5">
+    <div class="col-3">
+      <button class="btn btn-outline-danger" type="button" (click)="clearChatHistory()">Clear chat history</button>
+    </div>
+  </div>
 
 </div>
