@@ -9,6 +9,5 @@ export class SharedService {
   currentOnlineUser: User = new User ();
 
   constructor() {
-    this.currentOnlineUser.username = 'Rodion';
    }
 }
